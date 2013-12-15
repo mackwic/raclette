@@ -1,0 +1,9 @@
+Ordered by priority:
+
+1. Write some tests
+2. Setup local code coverage
+    -> which one to use ?
+3. Setup code smells detector
+    -> https://github.com/troessner/reek/wiki
+4. Setup test testor
+    -> http://glu.ttono.us/articles/2006/12/19/tormenting-your-tests-with-heckle
