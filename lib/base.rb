@@ -1,3 +1,10 @@
+require './lib/utils/atomic_id'
+require './lib/utils/logger'
+require './lib/utils/rakelette'
+require './lib/utils/central_storage'
+require './lib/scheduler'
+require './lib/http'
+
 module Raclette
   class Base
     ## TODO
