@@ -1,3 +1,4 @@
+require './lib/utils/atomic_id'
 module Raclette
   class Logger
     @@counter = AtomicId.new

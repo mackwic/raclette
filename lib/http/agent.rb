@@ -1,3 +1,4 @@
+require './lib/utils/atomic_id'
 module Raclette
   module HTTP
  
