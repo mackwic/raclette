@@ -19,7 +19,7 @@ module Raclette
         logger.proxy.info "Changed proxy to #{proxy}"
       end
 
-      def get_page address, options={}
+      def get address, options={}
         domain = Domainatrix.parse(address).domain
 
         begin
