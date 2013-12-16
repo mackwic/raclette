@@ -6,11 +6,13 @@ module Raclette
       sync {|store| store[key] = value}
     end
 
-    def self.reteive(key)
+    def self.retreive(key)
       res = nil
       sync {|store| res = store[key]}
       res
     end
+
+    attr_reader :mutex, :data
 
     private
     def self.me
@@ -20,8 +22,6 @@ module Raclette
     def self.sync
       me.mutex.synchronize {yield me.data}
     end
-
-    attr_reader :mutex, :data
 
     def initialize
       @mutex = Mutex.new
