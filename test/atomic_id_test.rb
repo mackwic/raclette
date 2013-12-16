@@ -22,15 +22,14 @@ describe Raclette::AtomicId do
   end
 
   it 'is thread safe' do
+    nb = 30
     id = AtomicId.new
-    count = CountDownLatch.new 10
+    count = CountDownLatch.new nb
     ids = {}
-    res = {}
-
     threads = []
 
-    10.times do |i|
-      threads << Thread.new(i, id, ids, res) do |i, id, ids, res|
+    nb.times do |i|
+      threads << Thread.new(i, id, ids) do |i, id, ids|
         myself = ids[i] = id.incr
 
         count.count_down
@@ -44,14 +43,10 @@ describe Raclette::AtomicId do
             result &&= (v != myself)
           end
         end
-
-        res[i] = result
+        result
       end
     end
 
-    threads.each {|t| t.join }
-    res.each do |_, v|
-      assert v
-    end
+    threads.each {|t| assert t.value }
   end
 end
