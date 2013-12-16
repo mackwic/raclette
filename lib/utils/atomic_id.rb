@@ -22,13 +22,13 @@ module Raclette
 
     alias :get :incr
 
-    #def a_incr
-    #  return false unless @mutex.try_lock
-    #  res = @count += 1
-    #  @mutex.unlock
-    #  res
-    #end
+    def a_incr
+      return false unless @mutex.try_lock
+      res = @count += 1
+      @mutex.unlock
+      res
+    end
 
-    #alias :a_get :a_incr
+    alias :a_get :a_incr
   end
 end
