@@ -11,9 +11,13 @@ module Raclette
     end
 
     def [](*args)
-      res = []
-      args.each {|a| res.push @storage[a]}
-      res
+      if args.length == 1
+        @storage[args.first]
+      else
+        res = []
+        args.each {|a| res.push @storage[a]}
+        res
+      end
     end
   end
 end
