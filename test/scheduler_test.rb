@@ -1,39 +1,28 @@
 require './test/test_helper'
 
-describe Raclette::Scheduler do
-
-  describe "me is a valid instance" do
+describe Scheduler do
+  describe "me" do
     it "should never be nil, always the same" do
-      refute_nil first = Raclette::Scheduler.me
-      refute_nil second = Raclette::Scheduler.me
+      refute_nil first = Scheduler.me
+      refute_nil second = Scheduler.me
       assert_same first, second
     end
 
     it "should exposes its internal queue" do
-      refute_nil Raclette::Scheduler.me.queue
-      assert_respond_to Raclette::Scheduler.me.queue, :<<
-      assert_respond_to Raclette::Scheduler.me.queue, :pop
+      refute_nil Scheduler.me.queue
+      assert_respond_to Scheduler.me.queue, :<<
+      assert_respond_to Scheduler.me.queue, :pop
     end
   end
 
-  #describe "plan" do
-
-  #  before do
-  #    @mock = []
-  #  end
-
-  #  class QueueStub
-  #    def queue
-
-  #    end
-  #  end
-
-  #  class Raclette::Scheduler
-  #    def self.me
-  #    end
-  #  end
-  #  it "can enqueue jobs" do
-
-  #  end
-  #end
+  describe "plan" do
+    it "can enqueue jobs" do
+      @i, @j = 0, 0
+      Scheduler.plan {|q| @j = 1337}
+      Scheduler.plan {|q| @i = 42}
+      Scheduler.flush
+      assert_equal 42, @i
+      assert_equal 1337, @j
+    end
+  end
 end
