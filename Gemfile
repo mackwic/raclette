@@ -10,10 +10,10 @@ gem 'socksify'
 gem 'logger-colors'
 gem "domainatrix", "~> 0.0.11"
 gem "thread", "~> 0.1.3"
-gem 'sucker_punch'
 gem "foreigner", "~> 1.6.0"
 
 group :test do
+  gem 'simplecov', require: false
   gem 'coveralls', require: false
   gem "turn"
 end
