@@ -10,6 +10,9 @@ module Raclette
       @@padding = [@@padding, @name.size].max
       @stacked_name = ''
 
+      Dir.mkdir 'log' unless Dir.exist? 'log'
+      `touch log/raclette_#{name}`
+
       @logger = ::Logger.new MultiIO.new(
         File.open("log/raclette_#{@name.parameterize}.log", "w"),
         STDOUT)

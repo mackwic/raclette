@@ -1,9 +1,5 @@
-#intialize minitest and coveralls
+require 'minitest/spec'
 require 'minitest/autorun'
-require 'simplecov'
-require 'coveralls'
-SimpleCov.start
-Coveralls.wear!
 
 Bundler.require :default, :test
 Dir.glob('./lib/**/*.rb').each {|f| require f}

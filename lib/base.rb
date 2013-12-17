@@ -13,19 +13,11 @@ module Raclette
 
     attr_reader :logger
 
-    def initialize(name, opt)
+    def initialize(name, opt = {})
       @logger = Logger.new name
       self.class.send :include, HTTP
 
-      opt.each do |k,v|
-        method = "options_#{k}"
-        next unless v and respond_to? method
-        if v == true
-          send method
-        else
-          send method, v
-        end
-      end
+      load_options opt
     end
 
     def self.produce(klass, opt)
