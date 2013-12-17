@@ -49,7 +49,7 @@ module Raclette
           res.map {|l| l['href']}.each do |l|
             Scheduler.plan do |q|
               agent.get l
-              q << -> {call_consumer agent.page}
+              q << proc {call_consumer agent.page}
             end
           end
         end
@@ -96,18 +96,29 @@ module Raclette
     #################
 
     def consumer_name
-      @consumer_name ||= "#{self.class.parameterize}Consumer"
+      @consumer_name ||= "#{self.class.to_s.parameterize}Consumer"
     end
 
-    def data_klass
-      require 'active_support/core_ext/string'
-      @data_klass ||= "#{self.class}Data".constantize
+    def data_class_name
+      @data_class_name ||= self.class.to_s.gsub(/\w+::/, '')
+    end
+
+    def data_class
+      # data class is the same name, but in the global namespace
+      @data_class ||= Object.const_get data_class_name
     end
 
     def call_consumer(*args)
       consumer = CentralStorage.retreive consumer_name
       data = consumer.call(*args)
-      data_klass.create data
+
+      # we probably need to create the data model which goes with it
+      if data_class.present?
+        @data_class = Class.new(ActiveRecord::Base)
+        @data_class.has_and_belongs_to_many :something # TODO
+      end
+      # TODO: check that data is compatible with the model
+      @data_class.find_or_create data unless options['no_save_data']
     end
   end
 end
