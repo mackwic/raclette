@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'raclette'
-  s.version = '0.0.0'
+  s.version = '0.0.3'
   s.summary = 'A complete scraping framework'
   s.description = '''
 Raclette is a fully featured scraping framework.
@@ -15,7 +15,7 @@ lines or less. Isn\'t that awesome ?
     "Matthieu 'jerska' Dumont <jerska@live.fr>"
   ]
   s.email = 'mackwic+raclette@gmail.com'
-  s.files = []
+  s.files = Dir.glob 'lib/**/*'
   s.homepage = 'https://github.com/mackwic/raclette'
   s.license = 'GPLv3'
 end

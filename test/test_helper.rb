@@ -1,3 +1,4 @@
+ENV['ENV'] = 'test'
 require 'minitest/spec'
 require 'minitest/autorun'
 

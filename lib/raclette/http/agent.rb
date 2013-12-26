@@ -1,7 +1,6 @@
-require './lib/utils/atomic_id'
+require_relative '../utils/atomic_id'
 module Raclette
   module HTTP
- 
     class Agent
       # TODO handle that with config file
       @@ua_list = JSON.load(File.open 'db/ua_list.json')

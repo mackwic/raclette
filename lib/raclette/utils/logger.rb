@@ -1,4 +1,6 @@
-require './lib/utils/atomic_id'
+require_relative './atomic_id.rb'
+require_relative './multi_io.rb'
+
 module Raclette
   class Logger
     @@counter = AtomicId.new
@@ -32,6 +34,20 @@ module Raclette
     def method_missing(name, *args)
       @stacked_name += "[#{name.to_s.parameterize}]"
       self
+    end
+
+    def with(opt={})
+      if opt[:name]
+        self.new "#{name}:#{opt[:name]}"
+      end
+    end
+
+    def self.debug(source, msg)
+      if ENV['DEBUG'] or ENV['D']
+        t = Time.now
+        source = source.class unless source.kind_of? Module
+        puts "[#{t.hour}:#{t.min}:#{t.sec}][#{source.to_s}] #{msg}"
+      end
     end
 
     private

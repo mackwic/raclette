@@ -3,7 +3,7 @@ module Raclette
     module Cookies
       def Cookies.included(mod)
         agent.pre_connect_hooks << proc do |agent, connexionID|
-          agent.cookie_jar = CentralStorage.retreive connexionID + 'Cookies'
+          agent.cookie_jar = CentralStorage.retrieve connexionID + 'Cookies'
           logger.cookies.debug "Retrieved cookies: #{agent.cookie_jar}"
         end
 

@@ -20,6 +20,7 @@ describe Scheduler do
       @i, @j = 0, 0
       Scheduler.plan {|q| @j = 1337}
       Scheduler.plan {|q| @i = 42}
+      sleep 0.001
       Scheduler.flush
       assert_equal 42, @i
       assert_equal 1337, @j

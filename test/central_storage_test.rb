@@ -6,7 +6,7 @@ describe Raclette::CentralStorage do
       CentralStorage.store "k#{i}", "v#{i}"
     end
     5.times do |i|
-      assert_equal "v#{i}", CentralStorage.retreive("k#{i}")
+      assert_equal "v#{i}", CentralStorage.retrieve("k#{i}")
     end
   end
 
@@ -27,10 +27,10 @@ describe Raclette::CentralStorage do
         count.wait
 
         res = true
-        res &&= (3 + i == CentralStorage.retreive("a#{i}"))
-        res &&= (4 + i == CentralStorage.retreive("b#{i}"))
-        res &&= ((1+i) == CentralStorage.retreive(2+i))
-        res &&= ('RACLETTE DU FROMAGE' == CentralStorage.retreive('global'))
+        res &&= (3 + i == CentralStorage.retrieve("a#{i}"))
+        res &&= (4 + i == CentralStorage.retrieve("b#{i}"))
+        res &&= ((1+i) == CentralStorage.retrieve(2+i))
+        res &&= ('RACLETTE DU FROMAGE' == CentralStorage.retrieve('global'))
       end
     end
 

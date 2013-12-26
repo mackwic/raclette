@@ -4,7 +4,7 @@ Bundler.require :default
 require 'logger'
 $logger = Logger.new 'system'
 
-Dir.glob('./lib/**/*.rake').each do |rake|
+Dir.glob('./.tmp_tasks/**/*.rake').each do |rake|
   load "#{rake}"
 end
 
@@ -19,12 +19,11 @@ end
 require 'rake/testtask'
 
 Rake::TestTask.new do |t|
-  ENV['ENV'] = 'test'
-  require 'simplecov'
-  SimpleCov.start do
-    command_name 'minitest'
-  end
-  require 'coveralls'
+  #require 'simplecov'
+  #SimpleCov.start do
+  #  command_name 'minitest'
+  #end
+  #require 'coveralls'
 
   t.libs.push "lib"
   t.test_files = FileList['test/**/*_test.rb']
